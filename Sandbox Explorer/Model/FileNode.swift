@@ -8,6 +8,7 @@
 import Foundation
 
 enum FileNode {
+    case loading(url: URL)
     case file(url: URL, bytes: Int?)
     case directory(url: URL, children: [URL])
     case symlink(url: URL, destination: URL)
@@ -15,6 +16,7 @@ enum FileNode {
     
     var url: URL {
         switch self {
+        case .loading(let url): url
         case .file(let url, _): url
         case .directory(let url, _): url
         case .symlink(let url, _): url
@@ -32,37 +34,9 @@ enum FileNode {
     
     var isAccessible: Bool {
         switch self {
+        case .loading(_): false
         case .inaccessible(_, _): false
         default: true
-        }
-    }
-    
-    static func at(url: URL) -> FileNode {
-        let fileManager = FileManager.default
-        
-        if let destination = try? fileManager.destinationOfSymbolicLink(atPath: url.path) {
-            return .symlink(url: url, destination: URL(filePath: destination))
-        }
-            
-        do {
-            var isDir: ObjCBool = false
-            _ = fileManager.fileExists(atPath: url.path, isDirectory: &isDir)
-            
-            if isDir.boolValue {
-                let children = try fileManager.contentsOfDirectory(atPath: url.path)
-                    .sorted()
-                    .map { URL(filePath: $0) }
-                return .directory(url: url, children: children)
-            }
-            
-            let attributes = try fileManager.attributesOfItem(atPath: url.path())
-            guard let size = attributes[.size] as? UInt64 else {
-                return .file(url: url, bytes: nil)
-            }
-            
-            return .file(url: url, bytes: Int(size))
-        } catch {
-            return .inaccessible(url: url, reason: error.localizedDescription)
         }
     }
 }

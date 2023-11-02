@@ -15,6 +15,7 @@
 		3580A2FB2AF3DF3300F1B824 /* FileSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2FA2AF3DF3300F1B824 /* FileSnippet.swift */; };
 		3580A2FD2AF3DF3C00F1B824 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2FC2AF3DF3C00F1B824 /* FileView.swift */; };
 		3580A3002AF3F98C00F1B824 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2FF2AF3F98C00F1B824 /* Pasteboard.swift */; };
+		3580A3032AF4008700F1B824 /* FileSystemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A3022AF4008700F1B824 /* FileSystemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3580A2FA2AF3DF3300F1B824 /* FileSnippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSnippet.swift; sourceTree = "<group>"; };
 		3580A2FC2AF3DF3C00F1B824 /* FileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 		3580A2FF2AF3F98C00F1B824 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
+		3580A3022AF4008700F1B824 /* FileSystemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				3580A2F72AF3DF2000F1B824 /* Model */,
+				3580A3012AF3FFE500F1B824 /* ViewModel */,
 				3580A2F62AF3DF1900F1B824 /* View */,
 				3580A2E72AF3DEED00F1B824 /* SandboxExplorerApp.swift */,
 				3580A2EB2AF3DEEE00F1B824 /* Assets.xcassets */,
@@ -95,6 +98,14 @@
 				3580A2F82AF3DF2E00F1B824 /* FileNode.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3580A3012AF3FFE500F1B824 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3580A3022AF4008700F1B824 /* FileSystemViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +184,7 @@
 				3580A2F92AF3DF2E00F1B824 /* FileNode.swift in Sources */,
 				3580A2FD2AF3DF3C00F1B824 /* FileView.swift in Sources */,
 				3580A2FB2AF3DF3300F1B824 /* FileSnippet.swift in Sources */,
+				3580A3032AF4008700F1B824 /* FileSystemViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

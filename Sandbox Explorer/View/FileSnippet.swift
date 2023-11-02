@@ -26,6 +26,8 @@ struct FileSnippet: View {
     var body: some View {
         HStack(alignment: .top) {
             switch node {
+            case .loading(_):
+                Image(systemName: "app.dashed")
             case .file(_, _):
                 Image(systemName: "doc")
             case .directory(_, _):
