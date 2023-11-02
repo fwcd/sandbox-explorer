@@ -8,10 +8,23 @@
 import Foundation
 
 class FileSystemViewModel: ObservableObject {
+    @Published var useSecurityScopedBookmarks = false
+    @Published var resolveSymlinks = true
+    
     func lookup(url: URL) -> FileNode {
+        if useSecurityScopedBookmarks {
+            url.startAccessingSecurityScopedResource()
+        }
+        
+        defer {
+            if useSecurityScopedBookmarks {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
+        
         let fileManager = FileManager.default
         
-        if let destination = try? fileManager.destinationOfSymbolicLink(atPath: url.path) {
+        if resolveSymlinks, let destination = try? fileManager.destinationOfSymbolicLink(atPath: url.path) {
             return .symlink(url: url, destination: URL(filePath: destination))
         }
             

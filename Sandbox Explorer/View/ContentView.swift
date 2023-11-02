@@ -14,7 +14,7 @@ struct ContentView: View {
         NavigationStack {
             FileSystemView()
                 .inspector(isPresented: $isInspectorShown) {
-                    Text("TODO")
+                    InspectorView()
                 }
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
@@ -29,4 +29,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(FileSystemViewModel())
 }

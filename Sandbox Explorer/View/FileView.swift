@@ -39,5 +39,8 @@ struct FileView: View {
         .onAppear {
             resolvedNode = fileSystem.lookup(url: url)
         }
+        .onReceive(fileSystem.objectWillChange) {
+            resolvedNode = fileSystem.lookup(url: url)
+        }
     }
 }
