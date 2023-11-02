@@ -49,8 +49,10 @@ enum FileNode {
             _ = fileManager.fileExists(atPath: url.path, isDirectory: &isDir)
             
             if isDir.boolValue {
-                let contents = try fileManager.contentsOfDirectory(atPath: url.path)
-                return .directory(url: url, children: contents.map { URL(filePath: $0) })
+                let children = try fileManager.contentsOfDirectory(atPath: url.path)
+                    .sorted()
+                    .map { URL(filePath: $0) }
+                return .directory(url: url, children: children)
             }
             
             let attributes = try fileManager.attributesOfItem(atPath: url.path())
