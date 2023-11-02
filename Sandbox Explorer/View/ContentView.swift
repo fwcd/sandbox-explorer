@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isInspectorShown = true
+    
     var body: some View {
-        List {
-            Section("Root Directory") {
-                FileView(url: URL(filePath: "/"))
-            }
-            Section("Home Directory") {
-                FileView(url: URL.homeDirectory)
-            }
+        NavigationStack {
+            FileSystemView()
+                .inspector(isPresented: $isInspectorShown) {
+                    Text("TODO")
+                }
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        Button("Inspector", systemImage: "sidebar.right") {
+                            isInspectorShown = !isInspectorShown
+                        }
+                    }
+                }
         }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
     }
 }
 
