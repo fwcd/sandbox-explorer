@@ -46,10 +46,7 @@ enum FileNode {
             
         do {
             var isDir: ObjCBool = false
-            let exists = fileManager.fileExists(atPath: url.path, isDirectory: &isDir)
-            guard exists else {
-                return .inaccessible(url: url, reason: "Non-existent")
-            }
+            _ = fileManager.fileExists(atPath: url.path, isDirectory: &isDir)
             
             if isDir.boolValue {
                 let contents = try fileManager.contentsOfDirectory(atPath: url.path)
