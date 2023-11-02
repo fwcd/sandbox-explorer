@@ -31,7 +31,8 @@ class FileSystemViewModel: ObservableObject {
                 if listDirectoriesViaUrl {
                     children = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
                 } else {
-                    children = try fileManager.contentsOfDirectory(atPath: url.path).map { URL(filePath: $0) }
+                    children = try fileManager.contentsOfDirectory(atPath: url.path)
+                        .map { url.appendingPathComponent($0) }
                 }
                 children.sort { $0.lastPathComponent < $1.lastPathComponent }
                 return .directory(url: url, children: children)
