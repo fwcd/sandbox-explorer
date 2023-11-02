@@ -13,6 +13,7 @@ struct FileView: View {
     var isLinked: Bool = false
     
     @EnvironmentObject private var fileSystem: FileSystemViewModel
+    @State private var isRefreshing: Bool = false
     @State private var resolvedNode: FileNode? = nil
     
     private var node: FileNode {
@@ -36,11 +37,25 @@ struct FileView: View {
                 FileSnippet(node: node, isRoot: isRoot, isLinked: isLinked)
             }
         }
+        .opacity(isRefreshing ? 0.8 : 1)
         .onAppear {
-            resolvedNode = fileSystem.lookup(url: url)
+            if resolvedNode == nil {
+                refresh()
+            }
         }
         .onReceive(fileSystem.objectWillChange) {
-            resolvedNode = fileSystem.lookup(url: url)
+            refresh()
+        }
+    }
+    
+    private func refresh() {
+        isRefreshing = true
+        Task {
+            let resolvedNode = fileSystem.lookup(url: url)
+            Task.detached { @MainActor in
+                self.resolvedNode = resolvedNode
+                isRefreshing = false
+            }
         }
     }
 }
