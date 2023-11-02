@@ -10,9 +10,11 @@ import SwiftUI
 struct FileView: View {
     let url: URL
     var isRoot: Bool = true
+    var isShallow: Bool = false
     var isLinked: Bool = false
     
     @EnvironmentObject private var fileSystem: FileSystemViewModel
+    @State private var isExpanded: Bool = false
     @State private var isRefreshing: Bool = false
     @State private var resolvedNode: FileNode? = nil
     
@@ -24,9 +26,13 @@ struct FileView: View {
         Group {
             switch node {
             case .directory(_, let children):
-                DisclosureGroup {
-                    ForEach(children, id: \.self) { childUrl in
-                        FileView(url: childUrl, isRoot: false, isLinked: false)
+                DisclosureGroup(isExpanded: $isExpanded) {
+                    ForEach(children, id: \.self) { child in
+                        if isShallow {
+                            FileSnippet(node: .loading(url: child), isRoot: false, isLinked: false)
+                        } else {
+                            FileView(url: child, isRoot: false, isShallow: !isExpanded, isLinked: false)
+                        }
                     }
                 } label: {
                     FileSnippet(node: node, isRoot: isRoot, isLinked: isLinked)
