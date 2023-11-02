@@ -14,6 +14,7 @@
 		3580A2F92AF3DF2E00F1B824 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2F82AF3DF2E00F1B824 /* FileNode.swift */; };
 		3580A2FB2AF3DF3300F1B824 /* FileSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2FA2AF3DF3300F1B824 /* FileSnippet.swift */; };
 		3580A2FD2AF3DF3C00F1B824 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2FC2AF3DF3C00F1B824 /* FileView.swift */; };
+		3580A3002AF3F98C00F1B824 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3580A2FF2AF3F98C00F1B824 /* Pasteboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3580A2F82AF3DF2E00F1B824 /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
 		3580A2FA2AF3DF3300F1B824 /* FileSnippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSnippet.swift; sourceTree = "<group>"; };
 		3580A2FC2AF3DF3C00F1B824 /* FileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
+		3580A2FF2AF3F98C00F1B824 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				3580A2E92AF3DEED00F1B824 /* ContentView.swift */,
 				3580A2FA2AF3DF3300F1B824 /* FileSnippet.swift */,
 				3580A2FC2AF3DF3C00F1B824 /* FileView.swift */,
+				3580A2FF2AF3F98C00F1B824 /* Pasteboard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			files = (
 				3580A2EA2AF3DEED00F1B824 /* ContentView.swift in Sources */,
 				3580A2E82AF3DEED00F1B824 /* SandboxExplorerApp.swift in Sources */,
+				3580A3002AF3F98C00F1B824 /* Pasteboard.swift in Sources */,
 				3580A2F92AF3DF2E00F1B824 /* FileNode.swift in Sources */,
 				3580A2FD2AF3DF3C00F1B824 /* FileView.swift in Sources */,
 				3580A2FB2AF3DF3300F1B824 /* FileSnippet.swift in Sources */,

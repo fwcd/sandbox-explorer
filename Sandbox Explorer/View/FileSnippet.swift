@@ -32,11 +32,28 @@ struct FileSnippet: View {
             }
             if case let .inaccessible(_, reason) = node {
                 Text(reason)
+                    .textSelection(.enabled)
             }
         }
-        .textSelection(.enabled)
         .foregroundStyle(node.isAccessible ? .primary : .tertiary)
         .foregroundStyle(isLinked ? Color(red: 0.6, green: 1, blue: 1) : .primary)
+        .contextMenu {
+            #if os(macOS)
+            Button("Show in Finder") {
+                NSWorkspace.shared.selectFile(node.path, inFileViewerRootedAtPath: node.path)
+            }
+            Divider()
+            #endif
+            Button("Copy Name") {
+                setPasteboard(node.name)
+            }
+            Button("Copy Path") {
+                setPasteboard(node.path)
+            }
+            Button("Copy URL") {
+                setPasteboard(node.url.absoluteString)
+            }
+        }
     }
 }
 
