@@ -25,6 +25,16 @@ struct FileSnippet: View {
     
     var body: some View {
         HStack(alignment: .top) {
+            switch node {
+            case .file(_, _):
+                Image(systemName: "doc")
+            case .directory(_, _):
+                Image(systemName: "folder.fill")
+            case .inaccessible(_, _):
+                Image(systemName: "exclamationmark.triangle")
+            default:
+                Image(systemName: "questionmark")
+            }
             Text(isRoot ? node.path : node.name)
             Spacer()
             if let formattedSize {
