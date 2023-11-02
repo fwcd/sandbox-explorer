@@ -28,6 +28,13 @@ enum FileNode {
         url.lastPathComponent
     }
     
+    var isAccessible: Bool {
+        switch self {
+        case .inaccessible(_, _): false
+        default: true
+        }
+    }
+    
     static func at(url: URL) -> FileNode {
         let fileManager = FileManager.default
         
@@ -50,7 +57,7 @@ enum FileNode {
             
             return .file(url: url, bytes: Int(size))
         } catch {
-            return .inaccessible(url: url, reason: String(describing: error))
+            return .inaccessible(url: url, reason: error.localizedDescription)
         }
     }
 }

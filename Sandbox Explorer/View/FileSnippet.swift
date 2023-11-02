@@ -23,17 +23,18 @@ struct FileSnippet: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Text(fullPath ? node.path : node.name)
             Spacer()
             if let formattedSize {
                 Text(formattedSize)
             }
             if case let .inaccessible(_, reason) = node {
-                Text("Inaccessible: \(reason)")
-                    .textSelection(.enabled)
+                Text(reason)
             }
         }
+        .textSelection(.enabled)
+        .foregroundStyle(node.isAccessible ? .primary : .tertiary)
     }
 }
 
