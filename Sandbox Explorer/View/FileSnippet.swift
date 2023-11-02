@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FileSnippet: View {
     let node: FileNode
-    var fullPath: Bool = false
+    var isRoot: Bool = false
+    var isLinked: Bool = false
     
     private var formattedSize: String? {
         guard case let .file(_, bytes?) = node else { return nil }
@@ -24,7 +25,7 @@ struct FileSnippet: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            Text(fullPath ? node.path : node.name)
+            Text(isRoot ? node.path : node.name)
             Spacer()
             if let formattedSize {
                 Text(formattedSize)
@@ -35,6 +36,7 @@ struct FileSnippet: View {
         }
         .textSelection(.enabled)
         .foregroundStyle(node.isAccessible ? .primary : .tertiary)
+        .foregroundStyle(isLinked ? Color(red: 0.6, green: 1, blue: 1) : .primary)
     }
 }
 

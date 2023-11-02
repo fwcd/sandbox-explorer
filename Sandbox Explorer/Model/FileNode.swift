@@ -10,12 +10,14 @@ import Foundation
 enum FileNode {
     case file(url: URL, bytes: Int?)
     case directory(url: URL, children: [URL])
+    case symlink(url: URL, destination: URL)
     case inaccessible(url: URL, reason: String)
     
     var url: URL {
         switch self {
         case .file(let url, _): url
         case .directory(let url, _): url
+        case .symlink(let url, _): url
         case .inaccessible(let url, _): url
         }
     }
@@ -38,6 +40,10 @@ enum FileNode {
     static func at(url: URL) -> FileNode {
         let fileManager = FileManager.default
         
+        if let destination = try? fileManager.destinationOfSymbolicLink(atPath: url.path) {
+            return .symlink(url: url, destination: URL(filePath: destination))
+        }
+            
         do {
             var isDir: ObjCBool = false
             let exists = fileManager.fileExists(atPath: url.path, isDirectory: &isDir)
