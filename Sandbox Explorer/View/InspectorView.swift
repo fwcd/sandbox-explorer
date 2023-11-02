@@ -16,6 +16,9 @@ struct InspectorView: View {
                 Toggle(isOn: $fileSystem.useSecurityScopedBookmarks) {
                     Text("Use Security-Scoped Bookmarks")
                 }
+                Toggle(isOn: $fileSystem.listDirectoriesViaUrl) {
+                    Text("List Directories via URL")
+                }
                 Toggle(isOn: $fileSystem.resolveSymlinks) {
                     Text("Resolve Symlinks")
                 }

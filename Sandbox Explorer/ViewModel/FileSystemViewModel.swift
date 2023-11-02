@@ -12,6 +12,7 @@ private let log = Logger(subsystem: "Sandbox Explorer", category: "FileSystemVie
 
 class FileSystemViewModel: ObservableObject {
     @Published var useSecurityScopedBookmarks = false
+    @Published var listDirectoriesViaUrl = true
     @Published var resolveSymlinks = true
     
     func lookup(url: URL, trySecurityScopedAccess: Bool = true) -> FileNode {
@@ -26,9 +27,13 @@ class FileSystemViewModel: ObservableObject {
             _ = fileManager.fileExists(atPath: url.path, isDirectory: &isDir)
             
             if isDir.boolValue {
-                let children = try fileManager.contentsOfDirectory(atPath: url.path)
-                    .sorted()
-                    .map { URL(filePath: $0) }
+                var children: [URL]
+                if listDirectoriesViaUrl {
+                    children = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+                } else {
+                    children = try fileManager.contentsOfDirectory(atPath: url.path).map { URL(filePath: $0) }
+                }
+                children.sort { $0.lastPathComponent < $1.lastPathComponent }
                 return .directory(url: url, children: children)
             }
             
